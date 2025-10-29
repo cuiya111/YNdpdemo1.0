@@ -1,4 +1,3 @@
-<!-- LayoutView.vue -->
 <template>
   <div class="layout-container">
     <!-- 标签栏 -->
@@ -28,7 +27,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 const activeTab = ref('region');
 const regions = ref({
@@ -54,7 +53,7 @@ const activeRegion = ref('area1');
 /* 标签栏：半透明背景，增强可读性 */
 .tab-bar {
   display: flex;
-  background: rgba(15, 43, 72, 0.5); /* 半透明深色背景 */
+  background: rgba(202, 243, 234, 0.2); /* 半透明深色背景 */
   backdrop-filter: blur(4px); /* 毛玻璃效果（可选） */
 }
 .tab-btn {
@@ -66,15 +65,15 @@ const activeRegion = ref('area1');
   cursor: pointer;
 }
 .tab-btn.active {
-  background: rgba(26, 76, 122, 0.7); /* 激活状态半透明 */
-  color: #00e5ff;
+  background: rgba(26, 122, 114, 0.7); /* 激活状态半透明 */
+  color: #0ff;
 }
 
 /* 区域选择按钮组：半透明背景 */
 .region-select {
   display: flex;
   flex-wrap: wrap;
-  background: rgba(15, 43, 72, 0.4); /* 比标签栏更透明 */
+  background: rgba(15, 72, 69, 0.4); /* 比标签栏更透明 */
 }
 .region-btn {
   width: 33.333%;
@@ -86,25 +85,25 @@ const activeRegion = ref('area1');
   margin: -1px 0 0 -1px;
 }
 .region-btn.active {
-  background: rgba(26, 76, 122, 0.6);
-  border-color: #00e5ff;
-  color: #00e5ff;
+  background: rgba(26, 122, 114, 0.6);
+  border-color: #0ff;
+  color: #0ff;
 }
 
 /* 列表区域：半透明背景 */
 .list-container {
   flex: 1;
   overflow-y: auto;
-  background: rgba(15, 43, 72, 0.3); /* 最透明的背景 */
+  background: rgba(15, 72, 63, 0.3); /* 最透明的背景 */
 }
 .list-item {
   display: flex;
   justify-content: space-between;
   padding: 12px 15px;
-  border-bottom: 1px solid rgba(42, 107, 159, 0.3);
+  border-bottom: 1px solid rgba(42, 159, 151, 0.3);
 }
 .icon {
-  color: #00e5ff;
+  color: #0ff;
   margin-right: 8px;
 }
 .text {
@@ -119,7 +118,7 @@ const activeRegion = ref('area1');
   width: 6px;
 }
 .list-container::-webkit-scrollbar-thumb {
-  background-color: rgba(42, 107, 159, 0.5);
+  background-color: rgba(42, 159, 140, 0.5);
   border-radius: 3px;
 }
 </style>

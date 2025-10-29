@@ -57,7 +57,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import bottomLeft from './bottomLeft.vue';
 import middleRight from './middleRight.vue';
 import bottomRight from './bottomRight.vue';

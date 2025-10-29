@@ -17,9 +17,9 @@
 // 引入组件1
 import bottomLeftOne from './bottomLeftOne.vue';
 // 引入组件2
-import BottomLeftTwo from './BottomLeftTwo.vue';
+import BottomLeftTwo from './bottomLeftTwo.vue';
 // 引入组件3
-import BottomLeftThree from './BottomLeftThree.vue';
+import BottomLeftThree from './bottomLeftThree.vue';
 // 引入组件4
 import BottomLeftFour from './bottomLeftFour.vue';
 </script>
