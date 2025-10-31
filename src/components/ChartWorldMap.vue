@@ -7,138 +7,148 @@
   import * as echarts from 'echarts'
   // 引入地图数据
   import worldMap from '../assets/map/worldChina.json'
+  import chinaMap from '../assets/map/china.json'
   import domImg from '../assets/images/33.png'
   import { walkUpBindingElementsAndPatterns } from 'typescript';
   // 图表1. 响应式Dom元素和echarts图表实例定义
   const chartRef = ref(null)
   let chartInstance = null
+  echarts.registerMap('china', chinaMap)
+  
 
   // 图表2.世界地图图表实例的初始化、配置、渲染并绑定事件
   const initChart = (mapName, mapData) => {
-    if (!chartRef.value) return
-    // 先销毁再创建ECharts实例，绑定到容器，注册地图
-    chartInstance?.dispose()
-    chartInstance = echarts.init(chartRef.value);
-    // 注册地图
-    echarts.registerMap(mapName, mapData)
-    // 地图配置
-    const option = {
-      tooltip: mapTooltip,
-      backgroundColor: "#011122",
-      geo: {
-        map: mapName,  
-        zoom: 5,
-        nameMap: worldMapName,
-        center: [104.2978515625, 35.8544921875],
-        layoutCenter: ['30%', '55%'],
-        layoutSize: '100%',
-        roam: true, 
+  if (!chartRef.value) return;
+  chartInstance?.dispose();
+  chartInstance = echarts.init(chartRef.value);
+  echarts.registerMap(mapName, mapData);
+
+  // 地图配置
+  const option = {
+    tooltip: mapTooltip,
+    backgroundColor: "#041E25",
+    geo: {
+      map: mapName,
+      zoom: 4,
+      nameMap: worldMapName,
+      center: [104.2978515625, 35.8544921875],
+      layoutCenter: ['23%', '30%'],
+      layoutSize: '100%',
+      roam: true,
+      itemStyle: {
+        color: {
+          image: domImg,
+          repeat: 'repeat',
+          imageSize: [30, 30],
+        },
+        borderColor: 'rgba(0, 255, 255, 0.3)',
+        borderWidth: 1,
+        opacity: 0.3,
+      },
+      emphasis: {
         itemStyle: {
           color: {
             image: domImg,
             repeat: 'repeat',
-            imageSize: [30, 30],
+            imageSize: [5, 5],
           },
-          borderColor: 'rgba(0, 255, 255, 0.3)', //省市边界线00fcff 516a89
-          borderWidth: 1,   
-          opacity: 0.3,     
+          borderColor: 'rgba(255, 255, 255, 0.5)',
+          borderWidth: 2,
+          opacity: 0.5,
+        },
+        label: {
+          show: false,
+          color: '#fff',
+        },
+      },
+      regions: [
+        {
+          name: '中国',
+          itemStyle: {
+            borderColor: '#00fcff',
+            borderWidth: 3,
+            areaColor: {
+              type: 'radial',
+              x: 0.5,
+              y: 0.5,
+              r: 0.5,
+              colorStops: [
+                { offset: 0, color: 'rgba(220, 255, 255, 1)' },
+                { offset: 1, color: 'rgba(0, 20, 20, 1)' }
+              ],
+              globalCoord: false
+            },
+            shadowColor: '#a9fafc',
+            shadowOffsetX: 0,
+            shadowOffsetY: 8,
+            shadowBlur: 10,
+            opacity: 1,
+          },
+        }
+      ]
+    },
+    series: [
+      {
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        geoIndex: 0,
+        symbol: 'circle',
+        symbolSize: 6,
+        showEffectOn: 'render',
+        rippleEffect: {
+          brushType: 'stroke',
+          scale: 10
+        },
+        hoverAnimation: true,
+        label: {
+          show: true,
+          formatter: name => {
+            return name.data[2];
+          },
+          position: 'right',
+          color: '#fff',
+          fontSize: 14,
+          distance: 10
+        },
+        itemStyle: {
+          color: 'rgba(0, 255, 255, 0.8)',
         },
         emphasis: {
           itemStyle: {
-            color: {
-              image: domImg,
-              repeat: 'repeat',
-              imageSize: [5, 5],
-            },
-            borderColor: 'rgba(255, 255, 255, 0.5)', //省市边界线00fcff 516a89
-            borderWidth: 2,   
-            opacity: 0.5,     
-          },
-          label: {
-            show: false,
-            color: '#fff',
-          },
-          
-        },
-        regions: [
-          {
-            name: '中国',
-            disabled: true,
-            itemStyle: {
-              borderColor: '#00fcff',
-              borderWidth: 3,
-              areaColor: {         // 区域填充色（径向渐变）
-                type: 'radial',    // 径向渐变类型
-                x: 0.5, y: 0.5,    // 渐变中心坐标
-                r: 0.5,            // 渐变半径
-                colorStops: [      // 渐变颜色节点
-                  { offset: 0, color: 'rgba(220, 255, 255, 1)' }, // 中心颜色
-                  { offset: 1, color: 'rgba(0, 20, 20, 1)' }    // 边缘颜色
-                ],
-                globalCoord: false  // 不使用全局坐标
-              },
-              shadowColor: '#a9fafc', // 区域阴影颜色
-              shadowOffsetX: 0,       // 阴影水平偏移
-              shadowOffsetY:8,      // 阴影垂直偏移
-              shadowBlur: 10,
-              opacity: 1,
-            },
+            borderColor: 'rgb(255, 242, 0)',
+            borderWidth: 6,
+            shadowBlur: 6,
+            shadowColor: 'rgb(255, 242, 0)'
           }
-        ]
-      },
-      series: [
-        { 
-          type: 'scatter', // 带有涟漪特效动画的散点 effectScatter
-          coordinateSystem: 'geo', // 坐标系，绑定到geo组件
-          geoIndex: 0,
-          symbol: 'circle',
-          symbolSize: 6,
-          showEffectOn: 'render',
-          rippleEffect: {
-              brushType: 'stroke',
-              scale: 10
-          },
-          hoverAnimation: true,
-          label: {
-              show: true,
-              formatter: name => {
-                  return name.data[2];
-              },
-              position: 'right',
-              color: '#fff',
-              fontSize: 14,
-              distance: 10
-          },
-          itemStyle: {
-              color: 'rgba(0, 255, 255, 0.8)',
-          },
-          data: convertData(data)
         },
-        { // 带有涟漪特效动画的散点
-          type: 'scatter', // 带有涟漪特效动画的散点 effectScatter
-          coordinateSystem: 'geo',
-          geoIndex: 0,
-          silent: true,
-          symbol: 'circle',
-          symbolSize: 4,
-          showEffectOn: 'render',
-          rippleEffect: {
-            brushType: 'stroke',
-            scale: 6
-          },
-          hoverAnimation: true,
-          itemStyle: {
-              color: 'rgba(255, 255, 255, 0.8)',
-          },
-          data: convertData(data)
-        }
-      ]
-    }
-    
-    chartInstance.hideLoading();
-    chartInstance.setOption(option);
-    bindMapEvents();
-  }
+        data: convertData(data)
+      },
+      {
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        geoIndex: 0,
+        silent: true,
+        symbol: 'circle',
+        symbolSize: 4,
+        showEffectOn: 'render',
+        rippleEffect: {
+          brushType: 'stroke',
+          scale: 6
+        },
+        hoverAnimation: true,
+        itemStyle: {
+          color: 'rgba(255, 255, 255, 0.8)',
+        },
+        data: convertData(data)
+      }
+    ]
+  };
+
+  chartInstance.hideLoading();
+  chartInstance.setOption(option);
+  bindMapEvents();
+};
+
 
   // 图表2.中国各省地图图表实例的初始化、配置、渲染并绑定事件
   const initChinaProvenceMap = (mapName, mapData) => {
@@ -150,41 +160,97 @@
     echarts.registerMap(mapName, mapData)
     
     const options = {
-      backgroundColor: '#011122',
-      tooltip: mapTooltip,
-      geo: {
-        map: mapName,        
-        aspectScale: 0.75,
-        zoom: 1,               
-        roam: false,    
-        animation: false,      
-        layoutCenter: ['35%', '50%'], 
-        layoutSize: '80%',     
-        label: {
-          show: true,
-          color:'#fff',
-        },
-        itemStyle: {
-          shadowColor: 'rgba(77, 77, 77, 0.8)', // 区域阴影颜色
-          shadowOffsetX: 10,       // 阴影水平偏移
-          shadowOffsetY: 11,      // 阴影垂直偏移 
-          borderWidth: 0,
-        },
-        emphasis: {
-          itemStyle: {
-            areaColor: 'rgba(0, 255, 255, 0.5)',
-            borderWidth: 0,
-          },
+      backgroundColor: '#041E25',
+      tooltip: mapTooltip, 
+      geo: [
+        // {
+        //   map: 'china',
+        //   aspectScale: 0.75,
+        //   zoom: 3,               
+        //   roam: false,
+        //   animation: false,
+        //   layoutCenter: ['25%', '30%'],
+        //   layoutSize: '80%',
+        //   label: {
+        //     show: true,
+        //     color:'#fff',
+        //   },
+        //   itemStyle: {
+        //     shadowColor: 'rgba(77, 77, 77, 0.8)', // 区域阴影颜色
+        //     shadowOffsetX: 10,       // 阴影水平偏移
+        //     shadowOffsetY: 11,      // 阴影垂直偏移 
+        //     borderWidth: 0,
+        //   },
+        //   emphasis: {
+        //     itemStyle: {
+        //       areaColor: 'rgba(0, 255, 255, 0.5)',
+        //       borderWidth: 0,
+        //     },
+        //     label: {
+        //       show: true,
+        //       color: '#fff',
+        //     },
+        //   },
+        //   regions: [
+        //     {
+        //       name: mapName,
+        //       selected:true,
+        //       itemStyle: {
+        //         borderColor: '#00fcff',
+        //         borderWidth: 3,
+        //         areaColor: {         // 区域填充色（径向渐变）
+        //           type: 'radial',    // 径向渐变类型
+        //           x: 0.5, y: 0.5,    // 渐变中心坐标
+        //           r: 0.5,            // 渐变半径
+        //           colorStops: [      // 渐变颜色节点
+        //             { offset: 0, color: 'rgba(220, 255, 255, 1)' }, // 中心颜色
+        //             { offset: 1, color: 'rgba(0, 20, 20, 1)' }    // 边缘颜色
+        //           ],
+        //           globalCoord: false  // 不使用全局坐标
+        //         },
+        //         shadowColor: '#a9fafc', // 区域阴影颜色
+        //         shadowOffsetX: 0,       // 阴影水平偏移
+        //         shadowOffsetY:8,      // 阴影垂直偏移
+        //         shadowBlur: 10,
+        //         opacity: 1,
+        //       },
+        //     },
+        //   ],
+        // },
+        {
+          map: mapName,        
+          aspectScale: 0.75,
+          zoom: 0.7,               
+          roam: false,    
+          animation: false,      
+          layoutCenter: ['25%', '30%'], 
+          layoutSize: '80%',     
           label: {
             show: true,
-            color: '#fff',
+            color:'#fff',
+          },
+          itemStyle: {
+            shadowColor: 'rgba(77, 77, 77, 0.8)', // 区域阴影颜色
+            shadowOffsetX: 10,       // 阴影水平偏移
+            shadowOffsetY: 11,      // 阴影垂直偏移 
+            borderWidth: 0,
+          },
+          emphasis: {
+            itemStyle: {
+              areaColor: 'rgba(0, 255, 255, 0.5)',
+              borderWidth: 0,
+            },
+            label: {
+              show: true,
+              color: '#fff',
+            },
           },
         },
-      },
+      ],
       series: [{
         type: 'map',
-        zoom: 1,
-        layoutCenter: ['35%', '50%'],
+        zoom: 0.7,
+        layoutCenter:  ['25%', '30%'],
         layoutSize: '80%',
         map: mapName,
         roam: false,
@@ -252,6 +318,57 @@
       clearTimeout(clickTimer);
       initChart('world', worldMap); // 使用'china'会显示南海诸岛
     });
+
+    tooltipEvent();
+  }
+
+  function tooltipEvent() {
+    console.log('绑定提示框事件');
+    // 自动轮播配置
+    let currentIndex = 0;
+    const dataLength = convertData(data).length;
+    let interval;
+
+    function startInterval() {
+      interval = setInterval(() => {
+        // 显示tooltip
+        chartInstance.dispatchAction({
+          type: 'showTip',
+          seriesIndex: 0,
+          dataIndex: currentIndex
+        });
+        
+        // 高亮当前区域
+        chartInstance.dispatchAction({
+          type: 'highlight',
+          seriesIndex: 0,
+          dataIndex: currentIndex
+        });
+
+        // 取消上一个高亮
+        chartInstance.dispatchAction({
+          type: 'downplay',
+          seriesIndex: 0,
+          dataIndex: (currentIndex - 1 + dataLength) % dataLength
+        });
+
+        currentIndex = (currentIndex + 1) % dataLength;
+      }, 3000);
+    }
+
+    // 初始化轮播
+    startInterval();
+
+    // 鼠标悬停时暂停轮播
+    chartInstance.on('mouseover', () => {
+      clearInterval(interval);
+    });
+
+    // 鼠标离开时恢复轮播
+    chartInstance.on('mouseout', () => {
+      startInterval();
+    });
+
   }
 
   // 窗口resize处理
@@ -594,8 +711,8 @@
 
   <style scoped>
   .chart-wrapper {
-    width: 100%;
-    height: 100%;
-    color: #b6f3f3;
+    width: 100vw;
+    height: 100vh;
+    color:rgb(255, 242, 0)
   }
   </style>

@@ -45,7 +45,7 @@ const activeRegion = ref('area1');
   height: 100%;
   background: transparent; /* 透明背景 */
   color: #fff; /* 文字用白色，避免与地图冲突 */
-  font-size: 13px;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
 }

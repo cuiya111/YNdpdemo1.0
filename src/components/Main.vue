@@ -1,194 +1,269 @@
 <template>
-  <dv-full-screen-container>
+  <dv-full-screen-container class="dashboard-root">
     <!-- 标题区域 -->
     <header class="header-container">
-      <dv-border-box-11 :title="headerTitle" :reverse="true" :color="borderColors" class="full-size"/>
-    </header>
-
-    <!-- 第二行内容区 -->
-    <main class="middle-container">
-      <!-- 左侧主内容 -->
-      <div style="width:100%;height:648px;box-sizing:border-box;flex:2;position: relative;">
-        <dv-border-box-12  class="map-wrapper">
-          <!-- 这里是echarts地图，世界地图 在该区域全局显示 -->
-          <ChartWorldMap />  
-        </dv-border-box-12>
-        <div  class="left-wrapper">
-          <ListRight />
-        </div>  
+      <div class="left-section">
+        数据可视化面板
       </div>
+      <div class="right-section">
+        <span class="time">{{currentTime}}</span>
+        <span class="date">{{currentDate}}</span>
+        <span class="week">{{currentWeekday}}</span>
+      </div>
+    </header>
+    <!-- 中间内容区 -->
+    <main class="dashboard-middle">
+      
+      <!-- 左侧主内容区 -->
+      <section class="middle-left">
+        <div class="map-container">
+          <ChartWorldMap />
+        </div>
+        <div class="map-sidebar">
+          <ListRight class="scrollable" />
+        </div>
+      </section>
 
-      <!-- 右侧上下内容 -->
-      <section class="right-panel">
-        <dv-border-box-7 class="content-box top-panel" :color="borderColors">
-          <dv-decoration-7 :reverse="true" style="width:200px;height:50px;" :color="decorationColors">
-            <span :style="{color: textColor}">右侧内容上</span>
-          </dv-decoration-7>
+      <!-- 右侧内容区 -->
+      <section class="middle-right">
+        <div class="right-top">
+          <dv-border-box-7 :color="borderColors">
+              <span :style="{ color: textColor }">右侧内容上</span>
+          </dv-border-box-7>
+        </div>
+        <div class="right-bottom">
+        <dv-border-box-7 :color="borderColors">
+          <span :style="{ color: textColor }">右侧内容下</span>
+          <!-- <middle-right/> -->
         </dv-border-box-7>
-        <dv-border-box-7 class="content-box bottom-panel" :color="borderColors">
-          <dv-decoration-7 :reverse="true" style="width:200px;height:50px;" :color="decorationColors">
-            <span :style="{color: textColor}">右侧内容下</span>
-          </dv-decoration-7>
-          <middle-right/>
-        </dv-border-box-7>
+        </div>
       </section>
     </main>
-
-    <!-- 第三行底部内容区 -->
-    <footer class="bottom-container">
-      <section class="bottom-left">
-        <dv-border-box-7 class="content-box full-height" :color="borderColors">
-          <dv-decoration-7 :reverse="true" style="width:200px;height:50px;" :color="titleColors">
-            <span :style="{color: textColor}">底部左侧内容</span>
-          </dv-decoration-7>
-          <bottom-left/>
+    <!-- 底部内容区 -->
+    <footer class="dashboard-footer">
+      <div class="footer-left">
+        <dv-border-box-7 :color="borderColors">
+            <span :style="{ color: textColor }">底部左侧内容</span>
+          <!-- <bottom-left/> -->
         </dv-border-box-7>
-      </section>
-      <section class="bottom-right">
-        <dv-border-box-7 class="content-box full-height" :color="borderColors">
-          <dv-decoration-7 :reverse="true" style="width:200px;height:50px;" :color="titleColors">
-            <span :style="{color: textColor}">底部右侧内容</span>
-          </dv-decoration-7>
-          <bottom-right/>
+      </div>
+      <div class="footer-right">
+        <dv-border-box-7 :color="borderColors">
+            <span :style="{ color: textColor }">底部右侧内容</span>
+          <!-- <bottom-right/> -->
         </dv-border-box-7>
-      </section>
+      </div>
     </footer>
   </dv-full-screen-container>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import bottomLeft from './bottomLeft.vue';
 import middleRight from './middleRight.vue';
 import bottomRight from './bottomRight.vue';
 import ChartWorldMap from './ChartWorldMap.vue';
 import ListRight from './ListRight.vue';
 
-// 标题变量 - 便于后期修改和维护
-const headerTitle = '数据可视化面板';
-const borderColors = ['#39c8b9','#0D3A3A']; // 边框渐变颜色
-const titleColors = ['#32B9B5', '#0D9BA9'];  // 标题装饰颜色
-const decorationColors = ['#6ad4d1','#187469'];
-const textColor = '#fff'
+// 样式配置集中管理
+const config = {
+  headerTitle: '数据可视化面板',
+  borderColors: ['#00ffff2e', '#000'],  // '#39c8b9' ,#00ffff2e
+  titleColors: ['#32B9B5', '#0D9BA9'],
+  decorationColors: ['#6ad4d1', '#187469'],
+  textColor: '#fff'
+};
 
+const { headerTitle, borderColors, titleColors, decorationColors, textColor } = config;
+
+// 初始化时间相关变量
+const currentTime = ref('');
+const currentDate = ref('');
+const currentWeekday = ref('');
+
+// 格式化时间的函数
+const formatTime = () => {
+  const now = new Date();
+  
+  // 格式化时间 (HH:MM:SS)
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  currentTime.value = `${hours}:${minutes}:${seconds}`;
+  
+  // 格式化日期 (YYYY-MM-DD)
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // 月份从0开始
+  const day = String(now.getDate()).padStart(2, '0');
+  currentDate.value = `${year}-${month}-${day}`;
+  
+  // 格式化星期
+  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+  currentWeekday.value = weekdays[now.getDay()] ?? '';
+};
+
+onMounted(() => {
+  formatTime();
+});
 </script>
 
-
-
 <style scoped>
+/* 根容器：全屏无滚动 */
+.dashboard-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background-color: #041E25;
+}
 
-/* 标题区域样式 */
+/* 头部容器：Flex 布局实现左右分栏 */
 .header-container {
-  width: 100%;
-  height: 80px;
-  position: relative;
-  background-color: #060E12;
-  
-}
-
-/* 中间内容区域 */
-.middle-container {
-  width: 100%;
-  height: 648px;
+  background-image: url(../assets/images/title.png);
+  background-size: contain;
+  background-repeat: no-repeat;
   display: flex;
-  justify-content: space-between;
-  gap: 10px; /* 增加间距避免内容紧贴 */
-  box-sizing: border-box;
-  padding: 0;
+  justify-content: space-between; 
+  align-items: center; 
+  height: 8vh; 
+  min-height: 60px;
+  color: #0ff; /* 文字颜色 */
+  font-family: "Microsoft Yahei", sans-serif; /* 可选：设置字体 */
+  border-bottom: 2px solid #00ffff24;
 }
 
-.left-main {
-  flex: 2;
-  box-sizing: border-box;
-  color: #091418;
+/* 左侧区域：文字居中 */
+.left-section {
+  flex: 1; /* 占满剩余空间（使文字居中更稳定） */
+  text-align: left;
+  padding-left: 10%;
+  font-size: 24px; /* 调整字体大小 */
+  font-weight: bold;
 }
-.top-panel {
-  height: 45%;
-  box-sizing: border-box;
+
+/* 右侧区域：文字靠右 */
+.right-section {
+  display: flex;
+  align-items: center;
+  padding-right: 20px; /* 可选：添加右侧内边距，调整位置 */
+  text-align: right;
+  font-size: 16px; 
+  grid-gap: 20px;
 }
-.bottom-panel {
-  height: 55%;
-  box-sizing: border-box;
+.time {
+  font-size: 22px;
+  font-weight: bold;
 }
-.right-panel {
+.date {
+  font-size: 15px;
+}
+.week {
+  font-size: 15px;
+}
+
+
+/* 中间内容区 */
+.dashboard-middle {
   flex: 1;
+  display: flex;
+  height: 60vh;
+}
+
+.middle-left {
+  /* flex: 2; */
+  width: 66%;
+  position: relative;
+  height: 100%;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.map-sidebar {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  width: 25%;
+  min-width: 240px;
+  max-width: 320px;
+  height: 96%;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+.scrollable {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background: rgba(57, 200, 185, 0.5);
+  border-radius: 3px;
+}
+
+.middle-right {
+  /* flex: 1; */
+  width: 34%;
   display: flex;
   flex-direction: column;
-  /* gap: 16px; */
-  /* padding: 8px 0; */
+  height: 100%;
 }
 
-/* 底部内容区域 */
-.bottom-container {
-  width: 100%;
-  height: 360px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  box-sizing: border-box;
-  /* padding: 5px; */
-}
-
-.bottom-left {
-  flex: 2;
-  box-sizing: border-box;
-}
-
-.bottom-right {
+.right-top, .right-bottom {
   flex: 1;
-  box-sizing: border-box;
 }
 
-/* 通用内容框样式 */
-.content-box {
-  width: 100%;
-  box-sizing: border-box;
-  opacity: 0.8
+/* 底部内容区 */
+.dashboard-footer {
+  height: 30vh;
+  min-height: 240px;
+  display: flex;
 }
 
-.full-height {
-  height: 100%;
+.footer-left {
+  width: 66%;
 }
 
-.top-panel {
-  height: 100%;
+.footer-right {
+  width: 34%;
 }
 
-.bottom-panel {
-  height: 100%;
-}
-
-
-.map-wrapper {
+/* 通用边框样式 */
+:deep(dv-border-box-7), :deep(dv-border-box-11) {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.left-wrapper {
-  /* 关键：基于父容器（左侧flex:2的div）定位 */
-  position: absolute;
-  top: 30px;
-  right: 0;
-  width: 300px; /* 固定宽度，可根据需求调整 */
-  height: 90%;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3); /* 增加左侧阴影，增强悬浮感 */
-  /* 避免超出父容器范围（可选） */
-  box-sizing: border-box;
-}
-
-/* 确保父容器的定位生效 */
-:deep(.left-container) {
-  position: relative;
+:deep(dv-decoration-7) {
+  width: 100%;
+  max-width: 200px;
+  height: 40px;
+  margin-bottom: 10px;
 }
 </style>
 
-
 <style>
 html, body {
-  background-color: #041E25; 
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* 避免页面滚动条 */
+  overflow: hidden;
+}
+
+
+
+.scrollable::-webkit-scrollbar {
+  display: initial;
 }
 </style>

@@ -364,9 +364,9 @@ onUnmounted(() => {
 
 <style scoped>
 .middleRight {
-  width: '100%';
-  height: 350px;
-  margin-top: -80px;
+  width: 100%;
+  height: 100%;
+  /* margin-top: -80px; */
   /* margin-left: 10px; */
   /* position: relative;  确保子元素定位正常 */
 }
