@@ -1,10 +1,20 @@
 <template>
-    <div ref="chartRef" class="bottomRight"></div>
+  <div style="width: 100%;;height:100%; display: flex;">
+    <div style="width: 50%;;height:100%; padding-top: 2%;">
+      <InfoBox title="等效利用小时数" record="12" style="height: 30%;"/>
+      <InfoBox title="平均故障响应时间(MLDT)" record="10" :icon="'car'" style="height: 30%;"/>
+      <InfoBox title="平均故障修复时间(MTTR)" record="18" :icon="'file'" style="height: 30%;"/>
+    </div>
+    <div style="width: 50%;height:100%;">
+      <div ref="chartRef" style="width: 100%; height: 100%;"></div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import * as echarts from 'echarts';
 import { ref, onMounted, onUnmounted } from 'vue';
+import InfoBox from './InfoBox.vue';
 
 const chartRef = ref<HTMLDivElement | null>(null);
 let myChart: echarts.ECharts | null = null;
@@ -124,15 +134,7 @@ onMounted(() => {
 onUnmounted(() => {
     myChart?.dispose();
 });
-
 </script>
 
 <style scoped>
-/* 让图表容器占满父组件空间 */
-.bottomRight {
-  width: '100%';
-  height: 300px;
-  margin-left: 20px;
-}
-
 </style>

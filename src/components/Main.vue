@@ -13,8 +13,6 @@
     </header>
     <!-- 中间内容区 -->
     <main class="dashboard-middle">
-      
-      <!-- 左侧主内容区 -->
       <section class="middle-left">
         <div class="map-container">
           <ChartWorldMap />
@@ -23,47 +21,60 @@
           <ListRight class="scrollable" />
         </div>
       </section>
-
-      <!-- 右侧内容区 -->
       <section class="middle-right">
         <div class="right-top">
           <dv-border-box-7 :color="borderColors">
-              <span :style="{ color: textColor }">右侧内容上</span>
+            <div style="width: 100%; height: 100%;">
+              <div style="height: 15%;" class="little-title">小标题1</div>
+              <div style="height: 85%;color: white;">中间右上内容区</div>
+            </div>
           </dv-border-box-7>
         </div>
         <div class="right-bottom">
         <dv-border-box-7 :color="borderColors">
-          <span :style="{ color: textColor }">右侧内容下</span>
-          <!-- <middle-right/> -->
+          <div style="width: 100%; height: 100%;">
+            <div style="height: 10%;" class="little-title">小标题1</div>
+            <div style="height: 90%;"><MiddleRight2/></div>
+          </div>
         </dv-border-box-7>
         </div>
       </section>
     </main>
     <!-- 底部内容区 -->
     <footer class="dashboard-footer">
-      <div class="footer-left">
+      <section class="footer-left">
         <dv-border-box-7 :color="borderColors">
-            <span :style="{ color: textColor }">底部左侧内容</span>
-          <!-- <bottom-left/> -->
+          <div style="width: 100%; height: 100%; ">
+            <div style="height: 11%;" class="little-title">小标题1</div>
+            <div style="width: 100%;height: 89%;display: flex;">
+              <bottomLeft/>
+            </div>
+          </div>
         </dv-border-box-7>
-      </div>
-      <div class="footer-right">
+      </section>
+      <section class="footer-right">
         <dv-border-box-7 :color="borderColors">
-            <span :style="{ color: textColor }">底部右侧内容</span>
-          <!-- <bottom-right/> -->
+          <div style="width: 100%; height: 100%; ">
+            <div style="height: 11.8%;" class="little-title">小标题1</div>
+            <div style="width: 100%;height: 88%;">
+                <BottomRight/>
+            </div>
+          </div>
         </dv-border-box-7>
-      </div>
+      </section>
     </footer>
   </dv-full-screen-container>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import bottomLeft from './bottomLeft.vue';
-import middleRight from './middleRight.vue';
-import bottomRight from './bottomRight.vue';
 import ChartWorldMap from './ChartWorldMap.vue';
 import ListRight from './ListRight.vue';
+import MiddleRight2 from './MiddleRight2.vue';
+import bottomLeft from './bottomLeft.vue';
+import BottomRight from './BottomRight.vue'
+import LineEchartsTitle from './LineEchartsTitle.vue'
+import InfoBox from './InfoBox.vue';
 
 // 样式配置集中管理
 const config = {
@@ -117,11 +128,12 @@ onMounted(() => {
   bottom: 0;
   overflow: hidden;
   background-color: #041E25;
+  color: rgba(22, 68, 100, 0.638);
 }
 
 /* 头部容器：Flex 布局实现左右分栏 */
 .header-container {
-  background-image: url(../assets/images/title.png);
+  background-image: url(@/assets/images/title.png);
   background-size: contain;
   background-repeat: no-repeat;
   display: flex;
@@ -132,35 +144,33 @@ onMounted(() => {
   color: #0ff; /* 文字颜色 */
   font-family: "Microsoft Yahei", sans-serif; /* 可选：设置字体 */
   border-bottom: 2px solid #00ffff24;
-}
-
-/* 左侧区域：文字居中 */
-.left-section {
-  flex: 1; /* 占满剩余空间（使文字居中更稳定） */
-  text-align: left;
-  padding-left: 10%;
-  font-size: 24px; /* 调整字体大小 */
-  font-weight: bold;
-}
-
-/* 右侧区域：文字靠右 */
-.right-section {
-  display: flex;
-  align-items: center;
-  padding-right: 20px; /* 可选：添加右侧内边距，调整位置 */
-  text-align: right;
-  font-size: 16px; 
-  grid-gap: 20px;
-}
-.time {
-  font-size: 22px;
-  font-weight: bold;
-}
-.date {
-  font-size: 15px;
-}
-.week {
-  font-size: 15px;
+  /* 左侧区域：文字居中 */
+  .left-section {
+    flex: 1; /* 占满剩余空间（使文字居中更稳定） */
+    text-align: left;
+    padding-left: 10%;
+    font-size: 24px; /* 调整字体大小 */
+    font-weight: bold;
+  }
+  /* 右侧区域：文字靠右 */
+  .right-section {
+    display: flex;
+    align-items: center;
+    padding-right: 20px; /* 可选：添加右侧内边距，调整位置 */
+    text-align: right;
+    font-size: 16px; 
+    grid-gap: 20px;
+  }
+  .time {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  .date {
+    font-size: 15px;
+  }
+  .week {
+    font-size: 15px;
+  }
 }
 
 
@@ -186,7 +196,7 @@ onMounted(() => {
 .map-sidebar {
   position: absolute;
   top: 2%;
-  right: 2%;
+  right: 1%;
   width: 25%;
   min-width: 240px;
   max-width: 320px;
@@ -218,8 +228,25 @@ onMounted(() => {
   height: 100%;
 }
 
-.right-top, .right-bottom {
-  flex: 1;
+.right-top {
+  height: 40%;
+  width: 100%;
+}
+.right-bottom {
+  height: 60%;
+  width: 100%;
+}
+
+.little-title {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left; /* 内容左对齐 */
+  align-content: center;
+  color: #fff;
+  padding: 0px 0 0 25px;
+  background-image: url('@/assets/images/1a.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 /* 底部内容区 */
@@ -231,10 +258,12 @@ onMounted(() => {
 
 .footer-left {
   width: 66%;
+  height: 100%;
 }
 
 .footer-right {
   width: 34%;
+  height: 100%;
 }
 
 /* 通用边框样式 */
@@ -253,7 +282,7 @@ onMounted(() => {
 }
 </style>
 
-<style>
+<!-- <style>
 html, body {
   margin: 0;
   padding: 0;
@@ -261,9 +290,7 @@ html, body {
   overflow: hidden;
 }
 
-
-
 .scrollable::-webkit-scrollbar {
   display: initial;
 }
-</style>
+</style> -->

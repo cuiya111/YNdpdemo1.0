@@ -1,6 +1,6 @@
 <template>
     <!-- 给图表容器加类名，便于控制样式 -->
-  <div ref="chartRef" class="bottomLeftThree"></div>
+  <div ref="chartRef" class="bottomLeftLine"></div>
 </template>
 
 <script lang="ts" setup>
@@ -27,8 +27,8 @@ onMounted(() => {
         const option = {
             legend: {
                 data: ['line1', 'line2'], 
-                top: '-5px',
-                left: 'right',
+                top: '30px',
+                left: '210px',
                 icon: 'roundRect',
                 itemWidth: 30,      // 图例标记的宽度
                 itemHeight: 1,      // 图例标记的高度
@@ -38,6 +38,12 @@ onMounted(() => {
                     fontSize: 10,  
                     fontWeight: 'normal' // 文字粗细
                 },
+          },
+            grid: {
+                left: '0%',
+                right: '5%',
+                bottom: '15%',
+                top: '60px',
             },
             xAxis: {
                 type: 'category',
@@ -58,7 +64,7 @@ onMounted(() => {
                     fontSize: 10
                 },
                 splitLine: {
-                    lineStyle: { color: 'rgba(255, 255, 255, 0.1)' }  // 网格线设为半透明
+                    lineStyle: { color: 'rgba(255, 255, 255, 0)' }  // 网格线设为半透明
                 },
             },
             series: [
@@ -70,7 +76,8 @@ onMounted(() => {
                     areaStyle: {},
                     smooth: true,
                     lineStyle: {
-                        width: 1.5
+                        width: 1.5,
+                        color: '#3970A5',  
                     },
                     showSymbol: false,
                     areaStyle: {
@@ -78,11 +85,11 @@ onMounted(() => {
                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                             {
                                 offset: 0,
-                                color: '#1060B0'
+                                color: 'rgba(16, 96, 176, 1)'
                             },
                             {
                                 offset: 1,
-                                color: '#0A3754'
+                                color: 'rgba(10, 55, 84, 0.1)'
                             }
                         ])
                     },
@@ -105,11 +112,11 @@ onMounted(() => {
                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                             {
                                 offset: 0,
-                                color: '#1A5A47'
+                                color: 'rgba(32, 193, 136, 1)'
                             },
                             {
                                 offset: 1,
-                                color: '#2CBE96'
+                                color: 'rgba(16, 38, 45, 0.5)'
                             }
                         ])
                     },
@@ -132,10 +139,8 @@ onUnmounted(() => {
 
 <style scoped>
 /* 让图表容器占满父组件空间 */
-.bottomLeftThree {
-    width: 350px;
-    height: 300px;
-    margin-left: 20px;
-    margin-top: -10px;
+.bottomLeftLine {
+    width: 100%;
+    height: 100%;
 }
 </style>

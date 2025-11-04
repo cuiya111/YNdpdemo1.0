@@ -1,42 +1,62 @@
 <template>
-  <!-- 父容器，使用 Flex 布局实现水平排列 -->
+
   <div class="chart-container">
-    <!-- 左下组件1 -->
-    <bottomLeftOne/>
-    <!-- 左下组件4 -->
-    <BottomLeftFour />
-    <!-- 左下组件2 -->
-    <BottomLeftTwo />
-    <!-- 左下组件3 -->
-    <BottomLeftThree />
-    
+    <div style="width: 40%;height: 100%;">
+      <div class="echartsTitle"><LineEchartsTitle :title="'生产基地项目情况'"/></div>
+      <div style="height: 47%; display: flex;">
+        <div style="width: 40%;height: 100%;">
+          <bottomLeftBar/>
+        </div>
+        <div style="width: 60%;">
+          <bottomLeftSche/>
+        </div>
+      </div>
+      <div style="height: 47%; display: flex;">
+        <div style="width: 40%;">
+          <bottomLeftBarO/>
+        </div>
+        <div style="width: 60%;">
+          <bottomLeftScheO/>
+        </div>
+      </div>
+    </div>
+    <div style="width: 30%;height: 100%;">
+      <div class="echartsTitle"><LineEchartsTitle :title="'装机容量'"/></div>
+      <bottomLeftColumn style="width: 100%; height: 94%;"/>
+    </div>
+    <div style="width: 30%;height: 100%;">
+      <div class="echartsTitle"><LineEchartsTitle :title="'发电量完成情况'"/></div>
+      <bottomLeftLine style="width: 100%; height: 94%;"/>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 // 引入组件1
-import bottomLeftOne from './bottomLeftOne.vue';
+import bottomLeftBar from './bottomLeftBar.vue';
+import bottomLeftBarO from './bottomLeftBarO.vue';
 // 引入组件2
-import BottomLeftTwo from './bottomLeftTwo.vue';
+import bottomLeftSche from './bottomLeftSche.vue';
+import bottomLeftScheO from './bottomLeftScheO.vue';
 // 引入组件3
-import BottomLeftThree from './bottomLeftThree.vue';
+import bottomLeftColumn from './bottomLeftColumn.vue';
 // 引入组件4
-import BottomLeftFour from './bottomLeftFour.vue';
+import bottomLeftLine from './bottomLeftLine.vue';
+import LineEchartsTitle from './LineEchartsTitle.vue'
+
 </script>
 
 <style scoped>
 /* 父容器使用 Flex 布局，子元素水平排列 */
 .chart-container {
   display: flex;
-  /* 让子元素在水平方向上有一定的间距，可根据需要调整 */
-  /* gap: 20px; */
-  /* 可以根据需要设置父容器的宽度，比如占满整个页面宽度 */
-  /* width: 100%; */
-  /* 可以根据需要设置父容器的高度，这里两个图表高度分别为 280px 左右，所以设置 300px 左右 */
-  /* height: 300px; */
-  /* 让内容在垂直方向上居中，可根据需要调整 */
-  /* align-items: center; */
-  /* 让内容在水平方向上居中，可根据需要调整 */
-  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
+.echartsTitle {
+  width: 90%; 
+  height: 6%;
+  padding-left: 3%;
+}
+
 </style>

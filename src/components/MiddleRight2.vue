@@ -1,10 +1,21 @@
 <template>
-    <div ref="chartRef" class="middleRight"></div>
+  <div style="width: 100%;height:100%;">
+    <div style="width: 100%; height: 15%; display: flex;">
+      <InfoBox title="平均故障响应时间(MLDT)" record="10" :icon="'car'" style="height:100%; width: 40%;"></InfoBox>
+      <InfoBox title="平均故障响应时间(MLDT)" record="10" style="height:100%;width: 40%;"></InfoBox>
+    </div>
+    <div class="echartsTitle"><LineEchartsTitle :title="'在途设备占比图'"/></div>
+    <div ref="chartRef" style="width: 100%; height: 40%;"></div>
+    <div class="echartsTitle"><LineEchartsTitle :title="'单日运单数情况'"/></div>
+    <div style="width: 100%; height: 33%; background-color: green;color: white;">图表占位</div>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import * as echarts from 'echarts';
 import { ref, onMounted, onUnmounted } from 'vue';
+import LineEchartsTitle from './LineEchartsTitle.vue'
+import InfoBox from './InfoBox.vue';
 
 const chartRef = ref<HTMLDivElement | null>(null);
 let myChart: echarts.ECharts | null = null;
@@ -363,11 +374,9 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.middleRight {
-  width: 100%;
-  height: 100%;
-  /* margin-top: -80px; */
-  /* margin-left: 10px; */
-  /* position: relative;  确保子元素定位正常 */
+.echartsTitle {
+  width: 90%; 
+  height: 6%;
+  padding-left: 3%;
 }
 </style>
