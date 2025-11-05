@@ -1,13 +1,13 @@
 <template>
   <div style="width: 100%;height:100%;">
-    <div style="width: 100%; height: 15%; display: flex;">
-      <InfoBox title="平均故障响应时间(MLDT)" record="10" :icon="'car'" style="height:100%; width: 40%;"></InfoBox>
-      <InfoBox title="平均故障响应时间(MLDT)" record="10" style="height:100%;width: 40%;"></InfoBox>
+    <div style="width: 100%; height: 18%; display: flex; padding-left: 3%;">
+      <InfoBox2 title="当前在运项目数" record="123" :icon="'book'" style="height: 100%;width: 50%; justify-content: center; "></InfoBox2>
+      <InfoBox2 title="异常运单数量" record="123" :icon="'file'" style="height: 100%;width: 40%;"></InfoBox2>
     </div>
     <div class="echartsTitle"><LineEchartsTitle :title="'在途设备占比图'"/></div>
-    <div ref="chartRef" style="width: 100%; height: 40%;"></div>
+    <div style="width: 100%; height: 40%;"><MiddleRightPie/></div>
     <div class="echartsTitle"><LineEchartsTitle :title="'单日运单数情况'"/></div>
-    <div style="width: 100%; height: 33%; background-color: green;color: white;">图表占位</div>
+    <div style="width: 100%; height: 30%;"><MiddleRightSche/></div>
   </div>
 </template>
 
@@ -15,7 +15,9 @@
 import * as echarts from 'echarts';
 import { ref, onMounted, onUnmounted } from 'vue';
 import LineEchartsTitle from './LineEchartsTitle.vue'
-import InfoBox from './InfoBox.vue';
+import MiddleRightSche from './middleRightSche.vue'
+import MiddleRightPie from './middleRightPie.vue'
+import InfoBox2 from './InfoBox2.vue';
 
 const chartRef = ref<HTMLDivElement | null>(null);
 let myChart: echarts.ECharts | null = null;

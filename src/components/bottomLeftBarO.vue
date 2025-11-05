@@ -224,19 +224,18 @@ onMounted(() => {
           text: `{img|}{text|${value}}`,
           subtext: `${currentData}/${targetData}`,
           left: 'center',
-          top: '20%',
           textStyle: {
             rich: {
               img: { height: 20, width: 15 },
               text: {
-                fontSize: 25,
+                fontSize: 20,
                 fontWeight: 'bold',
                 color: '#fff',
                 verticalAlign: 'middle',
                 padding: [0, 5, 0, 5],
               },
               pre: {
-                fontSize: 15,
+                fontSize: 14,
                 color: '#f26a6a',
                 verticalAlign: 'middle',
               },
@@ -349,10 +348,10 @@ const handleResize = () => {
 <style scoped>
 .bottomLeftBarO {
   width: 100%;
-  height: 85%;
+  height: 70%;
 }
 .chartName {
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
 }
 </style>

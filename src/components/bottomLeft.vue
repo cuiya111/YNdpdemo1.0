@@ -3,30 +3,30 @@
   <div class="chart-container">
     <div style="width: 40%;height: 100%;">
       <div class="echartsTitle"><LineEchartsTitle :title="'生产基地项目情况'"/></div>
-      <div style="height: 47%; display: flex;">
-        <div style="width: 40%;height: 100%;">
-          <bottomLeftBar/>
+      <div style="height: 40%; display: flex;padding-top: 5%;">
+        <div style="width: 40%;">
+          <bottomLeftBar />
         </div>
         <div style="width: 60%;">
-          <bottomLeftSche/>
+          <bottomLeftSche />
         </div>
       </div>
-      <div style="height: 47%; display: flex;">
+      <div style="height: 40%; display: flex;">
         <div style="width: 40%;">
           <bottomLeftBarO/>
         </div>
         <div style="width: 60%;">
-          <bottomLeftScheO/>
+          <bottomLeftScheO />
         </div>
       </div>
     </div>
     <div style="width: 30%;height: 100%;">
       <div class="echartsTitle"><LineEchartsTitle :title="'装机容量'"/></div>
-      <bottomLeftColumn style="width: 100%; height: 94%;"/>
+      <bottomLeftColumn style="width: 100%; height: 84%;"/>
     </div>
     <div style="width: 30%;height: 100%;">
       <div class="echartsTitle"><LineEchartsTitle :title="'发电量完成情况'"/></div>
-      <bottomLeftLine style="width: 100%; height: 94%;"/>
+      <bottomLeftLine style="width: 100%; height: 84%;"/>
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@ import LineEchartsTitle from './LineEchartsTitle.vue'
 }
 .echartsTitle {
   width: 90%; 
-  height: 6%;
+  height: 8%;
   padding-left: 3%;
 }
 

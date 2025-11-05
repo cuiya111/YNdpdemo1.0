@@ -26,10 +26,10 @@ onMounted(() => {
     const option = {
       backgroundColor: 'transparent',
       grid: {
-          left: "15%",
-          right: "8%",
+          left: '0%',
+          right: "15%",
           bottom: "5%",
-          top: "10%",
+          top: "5%",
           containLabel: false,
       },
       xAxis: [
@@ -174,6 +174,5 @@ onUnmounted(() => {
 .bottomLeftSche {
   width: 100%;
   height: 100%;
-  color: #00ffff;
 }
 </style> 

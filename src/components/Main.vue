@@ -25,15 +25,15 @@
         <div class="right-top">
           <dv-border-box-7 :color="borderColors">
             <div style="width: 100%; height: 100%;">
-              <div style="height: 15%;" class="little-title">小标题1</div>
-              <div style="height: 85%;color: white;">中间右上内容区</div>
+              <div style="height: 15%;" class="little-title">业务系统PHM</div>
+              <div style="height: 85%;"><MiddleRight1/></div>
             </div>
           </dv-border-box-7>
         </div>
         <div class="right-bottom">
         <dv-border-box-7 :color="borderColors">
           <div style="width: 100%; height: 100%;">
-            <div style="height: 10%;" class="little-title">小标题1</div>
+            <div style="height: 10%;" class="little-title">业务系统智能物流</div>
             <div style="height: 90%;"><MiddleRight2/></div>
           </div>
         </dv-border-box-7>
@@ -45,9 +45,9 @@
       <section class="footer-left">
         <dv-border-box-7 :color="borderColors">
           <div style="width: 100%; height: 100%; ">
-            <div style="height: 11%;" class="little-title">小标题1</div>
+            <div style="height: 11%;" class="little-title">生产经营信息</div>
             <div style="width: 100%;height: 89%;display: flex;">
-              <bottomLeft/>
+              <BottomLeft/>
             </div>
           </div>
         </dv-border-box-7>
@@ -55,7 +55,7 @@
       <section class="footer-right">
         <dv-border-box-7 :color="borderColors">
           <div style="width: 100%; height: 100%; ">
-            <div style="height: 11.8%;" class="little-title">小标题1</div>
+            <div style="height: 11.8%;" class="little-title">业务系统运维</div>
             <div style="width: 100%;height: 88%;">
                 <BottomRight/>
             </div>
@@ -70,11 +70,10 @@
 import { ref, onMounted } from 'vue';
 import ChartWorldMap from './ChartWorldMap.vue';
 import ListRight from './ListRight.vue';
+import MiddleRight1 from './MiddleRight1.vue';
 import MiddleRight2 from './MiddleRight2.vue';
-import bottomLeft from './bottomLeft.vue';
+import BottomLeft from './BottomLeft.vue';
 import BottomRight from './BottomRight.vue'
-import LineEchartsTitle from './LineEchartsTitle.vue'
-import InfoBox from './InfoBox.vue';
 
 // 样式配置集中管理
 const config = {
@@ -129,6 +128,18 @@ onMounted(() => {
   overflow: hidden;
   background-color: #041E25;
   color: rgba(22, 68, 100, 0.638);
+
+  .little-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left; 
+    align-content: center;
+    color: #fff;
+    padding: 0px 0 0 25px;
+    background-image: url('@/assets/images/1a.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
 }
 
 /* 头部容器：Flex 布局实现左右分栏 */
@@ -139,24 +150,22 @@ onMounted(() => {
   display: flex;
   justify-content: space-between; 
   align-items: center; 
-  height: 8vh; 
-  min-height: 60px;
-  color: #0ff; /* 文字颜色 */
-  font-family: "Microsoft Yahei", sans-serif; /* 可选：设置字体 */
+  height: 7%; 
+  color: #0ff; 
+  font-family: "Microsoft Yahei", sans-serif;
   border-bottom: 2px solid #00ffff24;
-  /* 左侧区域：文字居中 */
+
   .left-section {
-    flex: 1; /* 占满剩余空间（使文字居中更稳定） */
     text-align: left;
     padding-left: 10%;
-    font-size: 24px; /* 调整字体大小 */
+    font-size: 24px; 
     font-weight: bold;
   }
-  /* 右侧区域：文字靠右 */
+ 
   .right-section {
     display: flex;
     align-items: center;
-    padding-right: 20px; /* 可选：添加右侧内边距，调整位置 */
+    padding-right: 20px; 
     text-align: right;
     font-size: 16px; 
     grid-gap: 20px;
@@ -165,132 +174,67 @@ onMounted(() => {
     font-size: 22px;
     font-weight: bold;
   }
-  .date {
-    font-size: 15px;
-  }
-  .week {
+  .date, .week {
     font-size: 15px;
   }
 }
-
 
 /* 中间内容区 */
 .dashboard-middle {
-  flex: 1;
   display: flex;
-  height: 60vh;
+  height: 58%;
+
+  .middle-left {
+    width: 66%;
+    position: relative; /*用于listRight组件的绝对定位的*/
+    height: 100%;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .map-sidebar {
+    position: absolute;
+    top: 2%;
+    right: 1%;
+    width: 25%;
+    min-width: 240px;
+    max-width: 320px;
+    height: 96%;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .middle-right {
+    width: 34%;
+    height: 100%;
+  }
+  .right-top {
+    height: 40%;
+    width: 100%;
+  }
+  .right-bottom {
+    height: 60%;
+    width: 100%;
+  }
 }
 
-.middle-left {
-  /* flex: 2; */
-  width: 66%;
-  position: relative;
-  height: 100%;
-}
-
-.map-container {
-  width: 100%;
-  height: 100%;
-}
-
-.map-sidebar {
-  position: absolute;
-  top: 2%;
-  right: 1%;
-  width: 25%;
-  min-width: 240px;
-  max-width: 320px;
-  height: 96%;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-.scrollable {
-  height: 100%;
-  overflow-y: auto;
-}
-
-.scrollable::-webkit-scrollbar {
-  width: 6px;
-}
-
-.scrollable::-webkit-scrollbar-thumb {
-  background: rgba(57, 200, 185, 0.5);
-  border-radius: 3px;
-}
-
-.middle-right {
-  /* flex: 1; */
-  width: 34%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.right-top {
-  height: 40%;
-  width: 100%;
-}
-.right-bottom {
-  height: 60%;
-  width: 100%;
-}
-
-.little-title {
-  font-size: 14px;
-  font-weight: bold;
-  text-align: left; /* 内容左对齐 */
-  align-content: center;
-  color: #fff;
-  padding: 0px 0 0 25px;
-  background-image: url('@/assets/images/1a.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-/* 底部内容区 */
 .dashboard-footer {
-  height: 30vh;
-  min-height: 240px;
+  height: 35%;
   display: flex;
+
+  .footer-left {
+    width: 66%;
+    height: 100%;
+  }
+  .footer-right {
+    width: 34%;
+    height: 100%;
+  }
 }
 
-.footer-left {
-  width: 66%;
-  height: 100%;
-}
 
-.footer-right {
-  width: 34%;
-  height: 100%;
-}
-
-/* 通用边框样式 */
-:deep(dv-border-box-7), :deep(dv-border-box-11) {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-:deep(dv-decoration-7) {
-  width: 100%;
-  max-width: 200px;
-  height: 40px;
-  margin-bottom: 10px;
-}
 </style>
-
-<!-- <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
-}
-
-.scrollable::-webkit-scrollbar {
-  display: initial;
-}
-</style> -->

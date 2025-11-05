@@ -27,8 +27,7 @@ onMounted(() => {
         const option = {
             legend: {
                 data: ['line1', 'line2'], 
-                top: '30px',
-                left: '210px',
+                right: '10%',
                 icon: 'roundRect',
                 itemWidth: 30,      // 图例标记的宽度
                 itemHeight: 1,      // 图例标记的高度
@@ -38,12 +37,11 @@ onMounted(() => {
                     fontSize: 10,  
                     fontWeight: 'normal' // 文字粗细
                 },
-          },
+            },
             grid: {
-                left: '0%',
-                right: '5%',
-                bottom: '15%',
-                top: '60px',
+                top: '10%',
+                bottom: '10%',
+                right: '10%'
             },
             xAxis: {
                 type: 'category',
@@ -69,7 +67,7 @@ onMounted(() => {
             },
             series: [
                 {
-                    data: [820, 232, 901, 634, 990, 130, 1020],
+                    data: [320, 1232, 101, 334, 990, 130, 1020],
                     name: 'line1',
                     type: 'line',
                     stack: 'Total',

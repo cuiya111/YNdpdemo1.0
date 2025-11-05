@@ -1,5 +1,5 @@
 <template>
-  <div ref="chartRef" class="bottomLeftSche"></div>
+  <div ref="chartRef" class="bottomLeftScheO"></div>
 </template>
 
 <script lang="ts" setup>
@@ -14,10 +14,10 @@ onMounted(() => {
     myChart = echarts.init(chartRef.value);
 
     const datas = [
-      { name: '2024年', value: '264' },
-      { name: '2025年', value: '464' },
+      { name: '2024年', value: '666' },
+      { name: '2025年', value: '888' },
     ]
-    const myColor = ['#329BE6'].reverse();
+    const myColor = ['#04CFF0'].reverse();
     const xData = datas.map((item) => item.name);
     const yData = datas.map((item) => Number(item.value));
     const max = Math.ceil(Math.max(...yData) * 1.2);
@@ -26,10 +26,10 @@ onMounted(() => {
     const option = {
       backgroundColor: 'transparent',
       grid: {
-          left: "15%",
-          right: "8%",
+          left: '0%',
+          right: "15%",
           bottom: "5%",
-          top: "10%",
+          top: "5%",
           containLabel: false,
       },
       xAxis: [
@@ -90,7 +90,7 @@ onMounted(() => {
                   colorStops: [
                     {
                       offset: 0,
-                      color: "#329BE6",
+                      color: "#0F1F45",
                     },
                     {
                       offset: 1,
@@ -125,7 +125,7 @@ onMounted(() => {
                 var num = myColor.length;
                 return myColor[params.dataIndex % num];
             },
-            shadowColor: "rgba(50, 155, 230, 0.8)",
+            shadowColor: "rgba(255, 255, 255, 0.5)",
             shadowBlur: 25,
             borderWidth: 1,
             opacity: 1,
@@ -145,7 +145,7 @@ onMounted(() => {
           barWidth: 2,
           itemStyle: {
             borderRadius: 4,
-            color: "rgba(22, 68, 100, 1)",
+            color: "rgba(13, 55, 78, 1)",
           },
           label: {
             show: true,
@@ -171,10 +171,8 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.bottomLeftSche {
+.bottomLeftScheO {
   width: 100%;
   height: 100%;
-  /* margin-left: -50px;
-  margin-top: 58px; */
 }
 </style> 

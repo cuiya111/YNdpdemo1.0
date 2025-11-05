@@ -26,13 +26,13 @@
   // 地图配置
   const option = {
     tooltip: mapTooltip,
-    backgroundColor: "#041E25",
+    backgroundColor: "#000",
     geo: {
       map: mapName,
-      zoom: 4,
+      zoom: 3.5,
       nameMap: worldMapName,
       center: [104.2978515625, 35.8544921875],
-      layoutCenter: ['23%', '30%'],
+      layoutCenter: ['22%', '27%'],
       layoutSize: '100%',
       roam: true,
       itemStyle: {
@@ -160,7 +160,7 @@
     echarts.registerMap(mapName, mapData)
     
     const options = {
-      backgroundColor: '#041E25',
+      backgroundColor: '#000',
       tooltip: mapTooltip, 
       geo: [
         // {

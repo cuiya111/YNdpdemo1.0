@@ -16,9 +16,9 @@
 <script lang="ts" setup>
 
     import { ref, onMounted } from "vue";
-    import iconBook from "@/assets/images/book.png";
-    import iconFile from "@/assets/images/file.png";
-    import iconCar from "@/assets/images/car.png";
+    import iconBook from "@/assets/images/clock.png";
+    import iconFile from "@/assets/images/bell.png";
+    import iconCar from "@/assets/images/setting.png";
 
     type iconType = "book" | "file" | "car";
 
@@ -53,14 +53,15 @@
     font-family: 'Source Han Sans', sans-serif;
     padding-left: 12%;
     .icon{
-        height: 80%;
+        height: 50%;
     }
     .info{
         display: flex;
         flex-direction: column;
         width: 100%;
-        height: 80%;
+        height: 60%;
         text-align: left;
+        padding-left: 6%;
     }
 
     .title{
@@ -68,12 +69,14 @@
         height: 50%;
         width: 100%;
         font-weight: lighter;
+        align-content: center;
     }
 
     .record{
       width: 100%;
       font-weight: lighter;
       font-size: 12px;
+      align-content: center;
     }
     .number{
       font-weight: bold;

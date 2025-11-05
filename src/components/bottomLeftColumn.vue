@@ -19,29 +19,29 @@ onMounted(() => {
     let data1 = [122, 368, 198, 123, 129];
 
     const option = {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow'
-        },
-      },  //提示框
-      // legend: {
-      //   data: ['bar1', 'bar2'], 
-      //   left: '220px',
-      //   top: '20px',
-      //   icon: 'rect',
-      //   itemWidth: 25, // 图例标记的宽度
-      //   itemHeight: 8, // 图例标记的高度
-      //   itemGap: 25, // 图例项之间的间距
-      //   textStyle: {
-      //     color: '#fff', // 文字颜色（适配深色背景）
-      //     fontSize: 10, // 文字大小
-      //     fontWeight: 'normal' // 文字粗细
+      // tooltip: {
+      //   trigger: 'axis',
+      //   axisPointer: {
+      //     type: 'shadow'
       //   },
-      // }, //小标题
+      // },  //提示框
+      legend: {
+        data: ['bar1', 'bar2'], 
+        icon: 'rect',
+        right: '10%',
+        itemWidth: 25, // 图例标记的宽度
+        itemHeight: 8, // 图例标记的高度
+        itemGap: 25, // 图例项之间的间距
+        textStyle: {
+          color: '#fff', // 文字颜色（适配深色背景）
+          fontSize: 10, // 文字大小
+          fontWeight: 'normal' // 文字粗细
+        },
+      }, //小标题
       grid: {
-        top: 25,
-        bottom: 15
+        top: '10%',
+        bottom: '10%',
+        right: '10%'
       },
       xAxis: {
         color: '#fff',
@@ -94,11 +94,14 @@ onMounted(() => {
           barWidth:'10px',
           stack: 'one',
           showBackground: true,
+          backgroundStyle: {
+            opacity: 0.1
+          },
           itemStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 0, color: 'rgba(50, 144, 255, 1)' },       // 亮蓝色（红、绿通道提升，更明亮）
-              { offset: 0.5, color: 'rgba(40, 102, 235, 0.2)' },  // 中蓝色（绿、蓝通道提升，透明度降低）
-              { offset: 1, color: 'rgba(20, 36, 46, 0)' } 
+              { offset: 0.5, color: 'rgba(40, 102, 235, 1)' },  // 中蓝色（绿、蓝通道提升，透明度降低）
+              { offset: 1, color: 'rgba(20, 36, 46, 1)' } 
             ]),
             barBorderRadius: [2,2,0,0]
           },
@@ -110,11 +113,14 @@ onMounted(() => {
           barWidth:'10px',
           stack: 'one',
           showBackground: true,
+          backgroundStyle: {
+            opacity: 0.1
+          },
           itemStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 0, color: 'rgba(37, 253, 183, 1)' },
-              { offset: 0.5, color: 'rgba(36, 159, 109, 0.5)' },
-              { offset: 1, color: 'rgba(12, 40, 42, 0.1)' }
+              { offset: 0.5, color: 'rgba(36, 159, 109, 1)' },
+              { offset: 1, color: 'rgba(12, 40, 42, 1)' }
             ]),
             barBorderRadius: [2,2,0,0]  //圆角
           },

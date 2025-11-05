@@ -6,6 +6,7 @@
 <script lang="ts" setup>
 import * as echarts from 'echarts';
 import { ref, onMounted, onUnmounted } from 'vue';
+import 'echarts-gl'; // 引入3D扩展
 
 const chartRef = ref<HTMLDivElement | null>(null);
 let myChart: echarts.ECharts | null = null;
@@ -227,19 +228,18 @@ onMounted(() => {
           text: `{img|}{text|${value}}`,
           subtext: `${currentData}/${targetData}`,
           left: 'center',
-          top: '20%',
           textStyle: {
             rich: {
               img: { height: 15, width: 10 },
               text: {
-                fontSize: 25,
+                fontSize: 20,
                 fontWeight: 'bold',
                 color: '#fff',
                 verticalAlign: 'middle',
                 padding: [0, 5, 0, 5],
               },
               pre: {
-                fontSize: 15,
+                fontSize: 14,
                 color: '#fff',
                 verticalAlign: 'middle',
               },
@@ -353,10 +353,10 @@ const handleResize = () => {
 <style scoped>
 .bottomLeftBar {
   width: 100%;
-  height: 85%;
+  height: 70%;
 }
 .chartName {
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
 }
 </style>
