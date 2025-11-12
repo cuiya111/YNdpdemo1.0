@@ -77,7 +77,7 @@ const activeRegion = ref('area1');
   border-bottom: 1px solid #0ff;
 }
 .a1{
-  color:rgba(5, 35, 31, 0.1)
+  color:rgb(148, 253, 253)
 }
 /* 区域选择按钮组 */
 .region-select {
@@ -99,7 +99,7 @@ const activeRegion = ref('area1');
   cursor: pointer;
   margin: 2% 1%;
   box-sizing: border-box;
-  background: rgba(5, 35, 45, 0.8);
+  background: rgba(5, 35, 45, 0.6);
 }
 .region-btn.active {
   background: rgb(0, 255, 255, 0.2);
@@ -130,7 +130,7 @@ const activeRegion = ref('area1');
   margin-bottom: 8px;
   display: flex;
   align-items: center;
-  background: rgba(5, 35, 45, 0.8);
+  background: rgba(5, 35, 45, 0.6);
 }
 /* 图片图标的样式 */
 .icon-img {

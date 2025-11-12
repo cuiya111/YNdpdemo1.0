@@ -29,7 +29,124 @@
   const option = {
     tooltip: mapTooltip,
     backgroundColor: "#000",
+    visualMap: {
+      //图例值控制
+      min: 1,
+      max: 20,
+      calculable: true,
+      show: false,
+      color: ['#fb0303','#ffde00', '#80ff00', '#1767f0' ],
+      textStyle: {
+      color: '#fff',
+      },
+    },
     geo: [
+      // 中国轮廓
+      {
+        map: 'chinaBorder',
+        aspectScale: 0.75,
+        zlevel: -1,
+        zoom: 0.63,
+        layoutCenter: ["22%", "36%"],
+        layoutSize: "100%",
+        show: true,
+        roam: false,
+        silent: true,
+        label: {
+          emphasis: {
+            show: false,
+          },
+        },
+        itemStyle: {
+          normal: {
+            borderColor: "#fff",
+            borderWidth: 1.8,
+            shadowColor:'#0ff',
+            shadowOffsetY: 0,
+            shadowBlur: 5,
+            areaColor: "transparent",
+          },
+        }
+      },
+      // 中国地图阴影
+      {
+        map: 'chinaBorder',
+        aspectScale: 0.75,
+        zlevel: -2,
+        zoom: 0.63,
+        layoutCenter: ["22%", "36.3%"],
+        layoutSize: "100%",
+        roam: false,
+        silent: true,
+        itemStyle: {
+          normal: {
+            borderWidth: 1,
+            borderColor: "rgba(71, 129, 131, 0.6)",
+            shadowColor: "#fff",//rgb(132, 236, 193)
+            shadowOffsetY: 0,
+            shadowBlur: 5,
+            areaColor: "transparent",
+          },
+        },
+      },
+      // 各省边界轮廓
+      {
+        map: 'china1',
+        aspectScale: 0.75,
+        zlevel: -3,
+        zoom: 0.63,
+        layoutCenter: ["22%", "36.6%"],
+        layoutSize: "100%",
+        roam: false,
+        silent: true,
+        itemStyle: {
+          normal: {
+            borderWidth: 1,
+            borderColor: "rgba(148, 253, 253,0.4)",
+            shadowColor: "#000",
+            shadowOffsetY: 0,
+            shadowBlur: 1,
+            areaColor: "transparent", 
+          },
+        },
+      },
+      {
+        map: 'china1',
+        aspectScale: 0.75,
+        zlevel: -4,
+        zoom: 0.63,
+        layoutCenter: ["22%", "37%"],
+        layoutSize: "100%",
+        roam: false,
+        silent: true,
+        itemStyle: {
+          normal: {
+            borderWidth: 1,
+            borderColor: "rgba(71, 129, 131,0.2)",
+            shadowColor: "rgba(0, 249, 208,0.3)", 
+            shadowOffsetY: 5,
+            shadowBlur: 10,
+            areaColor: {
+              type: "linear",
+              x: 1200,
+              y: 0,
+              x2: 0,
+              y2: 0,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: "rgba(0,0,0,0.2)", // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: "rgba(0, 172, 209, 0.2)", // 50% 处的颜色
+                },
+              ],
+              global: true, // 缺省为 false
+            },
+          },
+        },
+      }, 
       {// 世界地图
         map: mapName,
         zoom: 3.5,
@@ -61,6 +178,7 @@
         silent: true,
         itemStyle: {
           opacity: 0.5,
+          borderWidth:0,
           areaColor:{
             image: domImg,
             repeat: 'repeat',
@@ -68,113 +186,6 @@
           },
         },
       },
-      // 中国地图
-      {
-        map: 'china1',
-        aspectScale: 0.75,
-        zoom: 0.63,
-        layoutCenter: ["22%", "36%"],
-        layoutSize: "100%",
-        show: true,
-        roam: false,
-        label: {
-          emphasis: {
-            show: false,
-          },
-        },
-        itemStyle: {
-          normal: {
-            borderColor: "#fff",
-            borderWidth: 1,
-            shadowColor: "#8cefef",
-            shadowOffsetY: 10,
-            shadowBlur: 120,
-            areaColor: "transparent",
-          },
-        }
-      },
-      // 中国地图阴影
-      {
-        map: 'china1',
-        aspectScale: 0.75,
-        zlevel: -1,
-        zoom: 0.63,
-        layoutCenter: ["22%", "36.5%"],
-        layoutSize: "100%",
-        roam: false,
-        silent: true,
-        itemStyle: {
-          normal: {
-            borderWidth: 1,
-            borderColor: "rgba(71, 129, 131, 0.8)",
-            shadowColor: "rgba(172, 122, 255,0.5)",
-            shadowOffsetY: 5,
-            shadowBlur: 15,
-            areaColor: "rgba(5,35, 31,0.1)",
-          },
-        },
-      },
-      {
-        map: 'china1',
-        aspectScale: 0.75,
-        zlevel: -2,
-        zoom: 0.63,
-        layoutCenter: ["22%", "37%"],
-        layoutSize: "100%",
-        roam: false,
-        silent: true,
-        itemStyle: {
-          normal: {
-            borderWidth: 1,
-            borderColor: "rgba(71, 129, 131,0.6)",
-            shadowColor: "rgba(65, 255, 236,1)",
-            shadowOffsetY: 5,
-            shadowBlur: 15,
-            areaColor: "transpercent",
-          },
-        },
-      },
-      {
-        map: 'china1',
-        aspectScale: 0.75,
-        zlevel: -3,
-        zoom: 0.63,
-        layoutCenter: ["22%", "37.5%"],
-        layoutSize: "100%",
-        roam: false,
-        silent: true,
-        itemStyle: {
-          normal: {
-            borderWidth: 1,
-            borderColor: "rgba(58,250,250,0.4)",
-            shadowColor: "rgba(0, 249, 208,0.3)",
-            shadowOffsetY: 5,
-            shadowBlur: 10,
-            areaColor: "transpercent",
-          },
-        },
-      }, 
-      // 中国地图轮廓
-      // {
-      //   map: 'chinaBorder',
-      //   aspectScale: 0.75,
-      //   zlevel: -4,
-      //   zoom: 0.635,
-      //   layoutCenter: ["22%", "38%"],
-      //   layoutSize: "100%",
-      //   roam: false,
-      //   silent: true,
-      //   itemStyle: {
-      //     normal: {
-      //       borderWidth: 5,
-      //       borderColor: "rgba(5, 57, 48, 0.8)",
-      //       shadowColor: "rgba(0, 250, 250, 0.5)",
-      //       shadowOffsetY: 15,
-      //       shadowBlur: 10,
-      //       areaColor: "rgba(5,35, 31,0.1)",
-      //     },
-      //   },
-      // },
     ],
     series: [
       {
@@ -182,19 +193,12 @@
         type: 'map',
         aspectScale: 0.75,
         zoom: 0.63,
+        zlevel: 1,
         layoutCenter: ["22%", "36%"],
         layoutSize: "100%",
         label: {
-          normal: {
-            show: false,
-            textStyle: {
-              color: "#fff",
-              fontSize: "120%"
-            },
-          },
-          emphasis: {
-            // show: false,
-          },
+          show: false,
+          color: '#fff',
         },
         itemStyle: {
           normal: {
@@ -204,27 +208,54 @@
               y: 0,
               x2: 0,
               y2: 0,
-              colorStops: [{
-                offset: 0,
-                color: "rgba(2, 131, 105, 0.7)", // 0% 处的颜色
-              }, {
-                offset: 1,
-                color: "rgba(0, 255, 255, 0.7)", // 50% 处的颜色
-              },],
-              global: true, // 缺市为 false
+              colorStops: [
+                {
+                  offset: 0,
+                  color: "rgba(0,0,0,0.5)", // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: "rgba(57, 212, 251,0.1)", // 50% 处的颜色
+                },
+              ],
+              global: true, // 缺省为 false
             },
-            borderColor: "#fff",
-            borderWidth: 0.2,
+            borderWidth: 0,
           },
           emphasis: {
             show: false,
             color: "#fff",
-            areaColor: "rgba(0,254,233,0.6)",
+            areaColor: "rgba(2, 128, 140, 0.5)",
+            shadowColor: "rgb(132, 236, 193)",
+            shadowOffsetY: 4,
+            shadowBlur: 10,
           },
         },
         markPoint: {
           symbol: "none",
         },
+      },
+      
+      {
+        type: 'effectScatter',
+        coordinateSystem: 'geo',
+        zlevel: 2,
+        rippleEffect: {
+          //涟漪特效
+          period: 4, //动画时间，值越小速度越快
+          brushType: 'stroke', //波纹绘制方式 stroke, fill
+          scale: 4, //波纹圆环最大限制，值越大波纹越大
+        },
+        
+        symbol: 'circle',
+        symbolSize: 4,
+        itemStyle: {
+          normal: {
+          show: false,
+          color: '#20EE7C',
+          },
+        },
+        data: convertData(data),
       },
     ]
   };
@@ -786,15 +817,15 @@
   }
   // 常量2.城市经纬度坐标
   const geoCoordMap = {
-      "北京": [116.46, 39.92],
-      "四川": [104.06, 30.67],
-      "浙江": [120.19, 30.26],
-      "山东": [117, 36.65],
-      "福建": [119.3, 26.08],
-      "上海": [121.48, 31.22],
-      "重庆": [106.54, 29.59],
-      "江西": [115.89, 28.68],
-      "广东": [113.23, 23.16],
+      "北京": [116.405285,39.904989],
+      "四川": [104.065735,30.659462],
+      "浙江": [120.153576,30.287459],
+      "山东": [117.000923,36.675807],
+      "福建": [119.306239,26.075302],
+      "上海": [121.472644,31.231706],
+      "重庆": [106.504962,29.533155],
+      "江西": [115.892151,28.676493],
+      "广东": [113.280637,23.125178],
       "山西": [112.53, 37.87],
       "黑龙江": [126.63, 45.75],
       "陕西": [108.95, 34.27],
@@ -823,37 +854,37 @@
   };
   // 常量3.各城市的数据
   const data = [
-      {name:"北京",value:88},
-      {name:"四川",value:88},
-      {name:"浙江",value:87},
-      {name:"山东",value:87},
-      {name:"福建",value:87},
-      {name:"上海",value:87},
-      {name:"重庆",value:87},
-      {name:"云南",value:87},
-      {name:"江西",value:86},
-      {name:"广东",value:85},
-      {name:"山西",value:84},
-      {name:"黑龙江",value:83},
-      {name:"陕西",value:83},
-      {name:"辽宁",value:82},
-      {name:"海南",value:82},
-      {name:"湖南",value:82},
-      {name:"宁夏",value:82},
-      {name:"河北",value:82},
-      {name:"湖北",value:81},
-      {name:"内蒙古",value:81},
-      {name:"天津",value:80},
-      {name:"贵州",value:80},
-      {name:"甘肃",value:80},
-      {name:"江苏",value:80},
-      {name:"吉林",value:80},
-      {name:"河南",value:79},
-      {name:"青海",value:79},
-      {name:"广西",value:78},
-      {name:"安徽",value:77},
-      {name:"新疆",value:76},
-      {name:"西藏",value:76}
+      {name:"北京",value:1},
+      {name:"四川",value:2},
+      {name:"浙江",value:1},
+      {name:"山东",value:2},
+      {name:"福建",value:12},
+      // {name:"上海",value:2},
+      // {name:"重庆",value:1},
+      // {name:"云南",value:2},
+      // {name:"江西",value:1},
+      // {name:"广东",value:2},
+      {name:"山西",value:1},
+      {name:"黑龙江",value:1},
+      {name:"陕西",value:11},
+      {name:"辽宁",value:1},
+      {name:"海南",value:1},
+      {name:"湖南",value:1},
+      {name:"宁夏",value:1},
+      {name:"河北",value:1},
+      {name:"湖北",value:1},
+      {name:"内蒙古",value:18},
+      {name:"天津",value:1},
+      // {name:"贵州",value:1},
+      // {name:"甘肃",value:0},
+      // {name:"江苏",value:0},
+      // {name:"吉林",value:0},
+      // {name:"河南",value:0},
+      // {name:"青海",value:1},
+      {name:"广西",value:1},
+      {name:"安徽",value:1},
+      {name:"新疆",value:20},
+      {name:"西藏",value:7}
   ];
   </script>
 
