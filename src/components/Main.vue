@@ -68,7 +68,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import ChartWorldMap from './ChartWorldMap.vue';
+import ChartWorldMap from './ChartWorldMap1.vue';
 import ListRight from './ListRight.vue';
 import MiddleRight1 from './MiddleRight1.vue';
 import MiddleRight2 from './MiddleRight2.vue';
@@ -126,7 +126,7 @@ onMounted(() => {
   right: 0;
   bottom: 0;
   overflow: hidden;
-  background-color: #041E25;
+  background-color: #000;
   color: rgba(22, 68, 100, 0.638);
 
   .little-title {
@@ -188,6 +188,9 @@ onMounted(() => {
     width: 66%;
     position: relative; /*用于listRight组件的绝对定位的*/
     height: 100%;
+    background-image: url(@/assets/images/mapbg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   .map-container {
@@ -212,7 +215,7 @@ onMounted(() => {
     width: 34%;
     height: 100%;
   }
-  .right-top {
+  .right-top {  
     height: 40%;
     width: 100%;
   }
